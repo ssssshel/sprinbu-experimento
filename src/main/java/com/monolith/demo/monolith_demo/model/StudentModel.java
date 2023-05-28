@@ -11,14 +11,17 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "students", schema = "tests")
-@IdClass(StudentModel.class)
 public class StudentModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +40,7 @@ public class StudentModel {
   @Column(name = "state")
   private Boolean state;
 
-  @JoinColumn(name = "id", referencedColumnName = "id_student")
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "id", referencedColumnName = "id_student", insertable = false, updatable = false)
   private StudentCourseModel studentCourseModel;
 }

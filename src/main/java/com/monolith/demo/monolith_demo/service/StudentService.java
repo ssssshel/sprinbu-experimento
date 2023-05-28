@@ -63,6 +63,7 @@ public class StudentService implements StudentServiceInter {
           .state(student.getState())
           .build();
 
+      System.out.println(studentModel);
       studentRepository.save(studentModel);
       student.setId_student(studentModel.getId());
       return Utils.getResponse(true, HttpStatus.CREATED.value(), Constants.OPERATION_SUCCESS, student);
